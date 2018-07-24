@@ -10,29 +10,57 @@ namespace PegePlayer.Common
 
         private readonly Peg _peg;
         private readonly ISet<PegNode> _linkedPegs;
-        private static IDictionary<Peg, PegNode> _pegNodesCreated = new Dictionary<Peg, PegNode>();
+        private readonly IDictionary<int, List<double>> _probabilityMemoizazion = new Dictionary<int, List<double>>();
 
-        private PegNode(Peg peg)
+        public PegNode(Peg peg)
         {
             _peg = peg;
             _linkedPegs = new HashSet<PegNode>();
         }
 
-        public static PegNode Create(Peg peg)
+        public override string ToString()
         {
-            if (!_pegNodesCreated.ContainsKey(peg))
+            return $"{Peg}";
+        }
+
+        public void AddLink(PegNode peg)
+        {
+            _linkedPegs.Add(peg);
+        }
+
+        public void AddMemoizacion(int initialPegColumn, double cumulativeProbability)
+        {
+            if (!_probabilityMemoizazion.ContainsKey(initialPegColumn))
             {
-                _pegNodesCreated[peg] = new PegNode(peg);
+                _probabilityMemoizazion[initialPegColumn] = new List<double>();
             }
 
-            return _pegNodesCreated[peg];
-        }        
+            _probabilityMemoizazion[initialPegColumn].Add(cumulativeProbability);
+        }
 
-        public PegNode AddLink(Peg peg)
+        public bool HasMemoizasion()
         {
-            var linkedPeg = Create(peg);
-            _linkedPegs.Add(linkedPeg);
-            return linkedPeg;
+           return _probabilityMemoizazion.Keys.Count > 0;
+        }
+
+        public IDictionary<int, List<double>> GetMemoizaion()
+        {
+            return _probabilityMemoizazion;
+        }
+
+        public class Factory
+        {
+            private readonly IDictionary<Peg, PegNode> _pegNodesCreated = new Dictionary<Peg, PegNode>();
+
+            public PegNode Create(Peg peg)
+            {
+                if (!_pegNodesCreated.ContainsKey(peg))
+                {
+                    _pegNodesCreated[peg] = new PegNode(peg);
+                }
+
+                return _pegNodesCreated[peg];
+            }
         }
     }
 }

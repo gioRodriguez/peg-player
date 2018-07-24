@@ -89,7 +89,26 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        //[Ignore]
+        public void BruteForcePegsSolutionResolveWith3x3Test()
+        {
+            // Arrange
+            var pegBoard = PegBoard.FromSource(new TestBoardSource(3, 3, 2, new[]
+            {
+                Peg.CreateMissingPeg(1, 1),
+                Peg.CreateMissingPeg(2, 1),
+                Peg.CreateMissingPeg(3, 2),
+            }));
+            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+
+            // Act
+            pegsBoardIterator.Resolve();
+            var actual = pegsBoardIterator.GetBestPositions();
+
+            // Assert
+            Assert.IsNotNull(actual);
+        }
+
+        [TestMethod]
         public void BruteForcePegsSolutionResolveWith21x21Test()
         {
             // Arrange
@@ -110,7 +129,6 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        //[Ignore]
         public void BruteForcePegsSolutionRetsolveWith23x23Test()
         {
             // Arrange
@@ -131,7 +149,6 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        //[Ignore]
         public void BruteForcePegsSolutionResolveWith25x25Test()
         {
             // Arrange
@@ -152,7 +169,7 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        //[Ignore]
+        [Ignore]
         public void BruteForcePegsSolutionResolveWith31x31Test()
         {
             // Arrange

@@ -50,9 +50,9 @@ namespace PegePlayer.Common
         public IEnumerable<Peg> GetPegUpNeighboursFrom(Peg peg)
         {
             var neighbours = new List<Peg>();
-            AddRigthNeighbours(peg, neighbours);
-            AddUpNeighbours(peg, neighbours);
             AddLeftAndUpNeighbours(peg, neighbours);
+            AddUpNeighbours(peg, neighbours);
+            AddRigthNeighbours(peg, neighbours);
             return neighbours;
         }
 

@@ -34,10 +34,7 @@ namespace PegePlayer.Common
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                return (Row * 397) ^ Column;
-            }
+            return (Row * 397) ^ Column;
         }
 
         #endregion
