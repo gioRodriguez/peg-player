@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PegPlayer.Test", "PegPlayer.Test\PegPlayer.Test.csproj", "{F0BC0383-A2DC-4E39-8805-5C6DC02974B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PegPlayer.Console", "PegPlayer.Console\PegPlayer.Console.csproj", "{5AC631C1-DC5F-4251-ABFB-9E28409C4153}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PegePlayer.Common", "PegePlayer.Common\PegePlayer.Common.csproj", "{AD3C994B-0308-48E9-A0CA-F8CB07117DEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PegPlayer.IntegrationTest", "PegPlayer.IntegrationTest\PegPlayer.IntegrationTest.csproj", "{F2D02FB3-2456-44D8-8695-A5894A1CE625}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0BC0383-A2DC-4E39-8805-5C6DC02974B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0BC0383-A2DC-4E39-8805-5C6DC02974B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0BC0383-A2DC-4E39-8805-5C6DC02974B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0BC0383-A2DC-4E39-8805-5C6DC02974B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AC631C1-DC5F-4251-ABFB-9E28409C4153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC631C1-DC5F-4251-ABFB-9E28409C4153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC631C1-DC5F-4251-ABFB-9E28409C4153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC631C1-DC5F-4251-ABFB-9E28409C4153}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD3C994B-0308-48E9-A0CA-F8CB07117DEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD3C994B-0308-48E9-A0CA-F8CB07117DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD3C994B-0308-48E9-A0CA-F8CB07117DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD3C994B-0308-48E9-A0CA-F8CB07117DEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2D02FB3-2456-44D8-8695-A5894A1CE625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D02FB3-2456-44D8-8695-A5894A1CE625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D02FB3-2456-44D8-8695-A5894A1CE625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D02FB3-2456-44D8-8695-A5894A1CE625}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFF5F280-C3C5-42B1-AE9B-CB0B9FCFB7F6}
+	EndGlobalSection
+EndGlobal
