@@ -104,7 +104,7 @@ namespace PegePlayer.Common
 
             private Peg NewPeg(int row, int column)
             {
-                var peg = Create(row, column, PegProbability(column));
+                var peg = Create(row, column, PegProbability(column), row != 0);
                 return MissingPegs.ContainsKey(peg) ? MissingPegs[peg] : peg;
             }
 
@@ -115,7 +115,7 @@ namespace PegePlayer.Common
 
             private bool IsOutOfBoard(int row, int column)
             {
-                return row <= 0 || row > _rows || column < 0 || column >= _columns;
+                return row < 0 || row > _rows || column < 0 || column >= _columns;
             }
 
             public Peg CreatePegUpFrom(Peg peg)
@@ -131,6 +131,11 @@ namespace PegePlayer.Common
             public Peg CreateUpAndRigthFrom(Peg peg)
             {
                 return CreatePeg(peg.Row - PegAtBorderProbality, peg.Column + PegAtBorderProbality);
+            }
+
+            public Peg CreateFreeFallPegFrom(Peg peg)
+            {
+                return CreatePeg(1, peg.Column);
             }
         }        
     }

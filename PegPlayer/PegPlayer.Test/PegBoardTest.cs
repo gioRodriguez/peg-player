@@ -40,13 +40,28 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
+        public void PegBoardGetPegNeighboursFrom33Test()
+        {
+            // Arrange
+            var pegBoard = PegBoard.FromSource(TestBoardSource.CreateDefault());
+
+            // Act
+            var actual = pegBoard.GetPegUpNeighboursFrom(Peg.Create(3, 3));
+
+            // Assert
+            Assert.AreEqual(2, actual.Count());
+            Assert.IsTrue(actual.Contains(Peg.Create(1, 3)));
+            Assert.IsTrue(actual.Contains(Peg.Create(2, 4)));
+        }
+
+        [TestMethod]
         public void PegBoardGetPegNeighboursTest()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(TestBoardSource.CreateDefault());
 
             // Act
-            var actual = pegBoard.GetPegNeighboursFrom(Peg.Create(4, 2));
+            var actual = pegBoard.GetPegUpNeighboursFrom(Peg.Create(4, 2));
 
             // Assert
             Assert.AreEqual(3, actual.Count());
@@ -62,7 +77,7 @@ namespace PegPlayer.Test
             var pegBoard = PegBoard.FromSource(TestBoardSource.CreateDefault());
             
             // Act
-            var actual = pegBoard.GetPegNeighboursFrom(Peg.Create(4, 0));
+            var actual = pegBoard.GetPegUpNeighboursFrom(Peg.Create(4, 0));
 
             // Assert
             Assert.AreEqual(1, actual.Count());
@@ -77,7 +92,7 @@ namespace PegPlayer.Test
             var pegBoard = PegBoard.FromSource(TestBoardSource.CreateDefault());
 
             // Act
-            var actual = pegBoard.GetPegNeighboursFrom(Peg.Create(5, 1));
+            var actual = pegBoard.GetPegUpNeighboursFrom(Peg.Create(5, 1));
 
             // Assert
             Assert.AreEqual(2, actual.Count());

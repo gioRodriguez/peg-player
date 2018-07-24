@@ -43,8 +43,8 @@
     <Compile Include="IPegBoardSolutionStrategy.cs" />
     <Compile Include="Peg.cs" />
     <Compile Include="PegBoard.cs" />
-    <Compile Include="PegBoardBruteForceSolutionStrategy.cs" />
-    <Compile Include="PegsBoardBruteForceIterator.cs" />
+    <Compile Include="PegNode.cs" />
+    <Compile Include="BruteForcePegsSolution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\IPegBoardSource.cs" />
     <Compile Include="Utils\PegBoardFileSource.cs" />

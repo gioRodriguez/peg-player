@@ -27,7 +27,7 @@ namespace PegePlayer.Common
             return new PegBoard(pegBoardSource);
         }        
 
-        private Peg GetUpAndLeftPegFrom(Peg peg)
+        public Peg GetUpAndLeftPegFrom(Peg peg)
         {
             return _pegsFactory.CreateUpAndLeftFrom(peg);
         }
@@ -42,7 +42,21 @@ namespace PegePlayer.Common
             return _pegsFactory.CreateUpAndRigthFrom(peg);
         }
 
-        public IEnumerable<Peg> GetPegNeighboursFrom(Peg peg)
+        private Peg GetFreeFallPegFrom(Peg peg)
+        {
+            return _pegsFactory.CreateFreeFallPegFrom(peg);
+        }
+
+        public IEnumerable<Peg> GetPegUpNeighboursFrom(Peg peg)
+        {
+            var neighbours = new List<Peg>();
+            AddRigthNeighbours(peg, neighbours);
+            AddUpNeighbours(peg, neighbours);
+            AddLeftAndUpNeighbours(peg, neighbours);
+            return neighbours;
+        }
+
+        public IEnumerable<Peg> GetPegDownNeighboursFrom(Peg peg)
         {
             var neighbours = new List<Peg>();
             AddRigthNeighbours(peg, neighbours);
@@ -61,6 +75,12 @@ namespace PegePlayer.Common
 
         private void AddUpNeighbours(Peg peg, List<Peg> neighbours)
         {
+            if (IsFreeFallPeg(peg))
+            {
+                neighbours.Add(GetFreeFallPegFrom(peg));
+                return;
+            }
+
             var upPeg = GetUpPegFrom(peg);
             if (!upPeg.IsMissingPeg)
             {
@@ -76,6 +96,17 @@ namespace PegePlayer.Common
             {
                 neighbours.Add(GetUpAndRigthPegFrom(upPeg));
             }
+        }        
+
+        private bool IsFreeFallPeg(Peg peg)
+        {
+            var upPeg = GetUpPegFrom(peg);
+            while (upPeg.IsMissingPeg)
+            {
+                upPeg = GetUpPegFrom(upPeg);
+            }
+
+            return upPeg.Equals(Peg.OutOfBoard);
         }
 
         private void AddLeftAndUpNeighbours(Peg peg, List<Peg> neighbours)
@@ -84,6 +115,6 @@ namespace PegePlayer.Common
             {
                 neighbours.Add(GetUpAndLeftPegFrom(peg));
             }
-        }
+        }        
     }
 }

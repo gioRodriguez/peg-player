@@ -64,10 +64,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PegBoardTest.cs" />
-    <Compile Include="PegsBoardIteratorTest.cs" />
+    <Compile Include="BruteForcePegsSolutionTest.cs" />
     <Compile Include="TestBoardSource.cs" />
     <Compile Include="PegFactoryTest.cs" />
-    <Compile Include="PegBoardBruteforceSolutionStrategyTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
