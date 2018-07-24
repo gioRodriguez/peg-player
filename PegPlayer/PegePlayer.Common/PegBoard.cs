@@ -18,7 +18,7 @@ namespace PegePlayer.Common
             Rows = pegBoardSource.Rows;
             Goal = pegBoardSource.Goal;
             MissingPegs = pegBoardSource.MissingPegs;
-            GoalPeg = Peg.Create(pegBoardSource.Rows, pegBoardSource.Goal + 1);
+            GoalPeg = Peg.Create(pegBoardSource.Rows, pegBoardSource.Goal * 2 + 1);
             _pegsFactory = new Peg.Factory(Rows, Columns, MissingPegs);
         }
 
@@ -115,6 +115,11 @@ namespace PegePlayer.Common
             {
                 neighbours.Add(GetUpAndLeftPegFrom(peg));
             }
-        }        
+        }
+
+        public bool IsFreefallSolution()
+        {
+            return IsFreeFallPeg(GoalPeg);
+        }
     }
 }

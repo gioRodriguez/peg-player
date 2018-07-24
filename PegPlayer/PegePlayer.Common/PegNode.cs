@@ -9,17 +9,23 @@ namespace PegePlayer.Common
         public Peg Peg => _peg;
 
         private readonly Peg _peg;
-        private readonly List<PegNode> _linkedPegs;
+        private readonly ISet<PegNode> _linkedPegs;
+        private static IDictionary<Peg, PegNode> _pegNodesCreated = new Dictionary<Peg, PegNode>();
 
         private PegNode(Peg peg)
         {
             _peg = peg;
-            _linkedPegs = new List<PegNode>();
+            _linkedPegs = new HashSet<PegNode>();
         }
 
         public static PegNode Create(Peg peg)
         {
-            return new PegNode(peg);
+            if (!_pegNodesCreated.ContainsKey(peg))
+            {
+                _pegNodesCreated[peg] = new PegNode(peg);
+            }
+
+            return _pegNodesCreated[peg];
         }        
 
         public PegNode AddLink(Peg peg)

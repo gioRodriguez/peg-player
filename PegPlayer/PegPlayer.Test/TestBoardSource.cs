@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PegePlayer.Common;
 using PegePlayer.Common.Utils;
 
@@ -16,7 +17,7 @@ namespace PegPlayer.Test
             Columns = columns;
             Rows = rows;
             Goal = goal;
-            MissingPegs = missingPegs;
+            MissingPegs = missingPegs ?? Enumerable.Empty<Peg>();
         }
 
         public static TestBoardSource CreateDefault()

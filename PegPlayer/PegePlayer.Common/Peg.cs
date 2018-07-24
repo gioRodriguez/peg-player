@@ -86,6 +86,7 @@ namespace PegePlayer.Common
             private readonly int _rows;
             private readonly int _columns;
             public IDictionary<Peg, Peg> MissingPegs = new Dictionary<Peg, Peg>();
+            private static readonly IDictionary<int, Peg> CreatedPegs = new Dictionary<int, Peg>();
 
             public Factory(int rows, int columns, IEnumerable<Peg> missingPegs = null)
             {
@@ -104,7 +105,13 @@ namespace PegePlayer.Common
 
             private Peg NewPeg(int row, int column)
             {
-                var peg = Create(row, column, PegProbability(column), row != 0);
+                var key = (row * 397) ^ column;
+                if (!CreatedPegs.ContainsKey(key))
+                {
+                    CreatedPegs[key] = Create(row, column, PegProbability(column), row != 0);
+                }
+
+                var peg = CreatedPegs[key];
                 return MissingPegs.ContainsKey(peg) ? MissingPegs[peg] : peg;
             }
 

@@ -9,6 +9,7 @@ namespace PegePlayer.Common
         private readonly Peg _currentPeg;
         private readonly IDictionary<int, double> _state = new Dictionary<int, double>();
 
+
         public BruteForcePegsSolution(PegBoard pegBoard)
         {
             _pegBoard = pegBoard;
@@ -17,6 +18,12 @@ namespace PegePlayer.Common
 
         public void Resolve()
         {
+            if (_pegBoard.IsFreefallSolution())
+            {
+                _state[_currentPeg.Column] = 1;
+                return;
+            }
+
             var root = PegNode.Create(_currentPeg);
             TraversePegTree(root, _currentPeg, 1.0);
         }
