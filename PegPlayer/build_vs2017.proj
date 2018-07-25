@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Test" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<DoubleQuotes>"</DoubleQuotes>
+		<Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+		<Platform Condition="'$(Platform)' == ''">AnyCPU</Platform>
+		<DropPath Condition="'$(DropPath)' == ''">$(MSBuildThisFileDirectory)deployment-packages\</DropPath>
+		<TestResultsPath Condition="'$(TestResultsPath)' == ''">$(MSBuildThisFileDirectory)test-results\</TestResultsPath>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<CommonProperties>Configuration=$(Configuration);Platform=$(Platform);VisualStudioVersion=15.0</CommonProperties>
+		<MsTestExePath>$(MSBuildProgramFiles32)\Microsoft Visual Studio\2017\Community\Common7\IDE\MSTest.exe</MsTestExePath>
+	</PropertyGroup>
+
+	<Target Name="_CleanTestResultsDirectory">
+		<RemoveDir Directories="$(TestResultsPath)" Condition="Exists('$(TestResultsPath)')"/>
+		<MakeDir Directories="$(TestResultsPath)"/>
+	</Target>
+
+	<Target Name="_RemovePreviousBuild">
+		<RemoveDir Directories="$(DropPath)" Condition="Exists('$(DropPath)')"/>
+		<MakeDir Directories="$(DropPath)"/>
+	</Target>
+
+	<Target Name="Build"
+	        DependsOnTargets="_CleanTestResultsDirectory;_RemovePreviousBuild;">
+		<ItemGroup>
+			<AllProjects Include="$(MSBuildThisFileDirectory)**\*.ConsoleApp.csproj"/>
+		</ItemGroup>
+		<MSBuild Projects="@(AllProjects)"
+		         Properties="$(CommonProperties);OutputPath=$(DropPath)"/>
+	</Target>
+
+	<Target Name="BuildTests"
+	        DependsOnTargets="_CleanTestResultsDirectory;_RemovePreviousBuild">
+		<ItemGroup>
+			<TestProjects Include="$(MSBuildThisFileDirectory)**\*Test.xproj"/>
+		</ItemGroup>
+		<MSBuild Projects="@(TestProjects)"
+		         Properties="$(CommonProperties)"/>
+	</Target>
+
+	<Target Name="_UnitTests"
+	        DependsOnTargets="_CleanTestResultsDirectory">
+		<ItemGroup>
+			<UnitTestAssemblies Include="$(MSBuildProjectDirectory)\**\bin\$(Configuration)\*.Test.dll"/>
+		</ItemGroup>
+		<Message Importance="high"
+		         Text="@(UnitTestAssemblies ->'/testcontainer:$(DoubleQuotes)$(Configuration)$(DoubleQuotes)', ' ')"/>
+		<Exec Command="$(DoubleQuotes)$(MsTestExePath)$(DoubleQuotes) @(UnitTestAssemblies ->'/testcontainer:$(DoubleQuotes)%(Identity)$(DoubleQuotes)', ' ') /resultsfile:$(TestResultsPath)Turing.Test.trx"
+		      WorkingDirectory="$(MSBuildThisFileDirectory)"
+		      IgnoreExitCode="false"/>
+	</Target>
+
+	<Target Name="Test"
+	        DependsOnTargets="Build;BuildTests;_UnitTests">
+	</Target>
+
+</Project>
