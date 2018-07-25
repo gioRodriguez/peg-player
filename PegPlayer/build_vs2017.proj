@@ -35,7 +35,7 @@
 	<Target Name="BuildTests"
 	        DependsOnTargets="_CleanTestResultsDirectory;_RemovePreviousBuild">
 		<ItemGroup>
-			<TestProjects Include="$(MSBuildThisFileDirectory)**\*Test.xproj"/>
+			<TestProjects Include="$(MSBuildThisFileDirectory)**\*Test.csproj"/>
 		</ItemGroup>
 		<MSBuild Projects="@(TestProjects)"
 		         Properties="$(CommonProperties)"/>
@@ -48,7 +48,7 @@
 		</ItemGroup>
 		<Message Importance="high"
 		         Text="@(UnitTestAssemblies ->'/testcontainer:$(DoubleQuotes)$(Configuration)$(DoubleQuotes)', ' ')"/>
-		<Exec Command="$(DoubleQuotes)$(MsTestExePath)$(DoubleQuotes) @(UnitTestAssemblies ->'/testcontainer:$(DoubleQuotes)%(Identity)$(DoubleQuotes)', ' ') /resultsfile:$(TestResultsPath)Turing.Test.trx"
+		<Exec Command="$(DoubleQuotes)$(MsTestExePath)$(DoubleQuotes) @(UnitTestAssemblies ->'/testcontainer:$(DoubleQuotes)%(Identity)$(DoubleQuotes)', ' ') /resultsfile:$(TestResultsPath)PegPlayer.Test.trx"
 		      WorkingDirectory="$(MSBuildThisFileDirectory)"
 		      IgnoreExitCode="false"/>
 	</Target>

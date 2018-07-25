@@ -12,7 +12,7 @@ namespace PegPlayer.Test
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(TestBoardSource.CreateDefault());
-            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);            
+            var pegsBoardIterator = PoorManMemoizingPegsSolution.Create(pegBoard);            
 
             // Act
             pegsBoardIterator.Resolve();
@@ -34,7 +34,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 1),
             }));
-            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
+            var pegsBoardIterator = PoorManMemoizingPegsSolution.Create(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -56,7 +56,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
+            var pegsBoardIterator = PoorManMemoizingPegsSolution.Create(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -78,7 +78,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
+            var pegsBoardIterator = PoorManMemoizingPegsSolution.Create(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -99,7 +99,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
+            var pegsBoardIterator = PoorManMemoizingPegsSolution.Create(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -120,7 +120,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
+            var pegsBoardIterator = PoorManMemoizingPegsSolution.Create(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -141,7 +141,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
+            var pegsBoardIterator = PoorManMemoizingPegsSolution.Create(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -162,7 +162,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
+            var pegsBoardIterator = PoorManMemoizingPegsSolution.Create(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -183,7 +183,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
+            var pegsBoardIterator = PoorManMemoizingPegsSolution.Create(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -204,7 +204,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
+            var pegsBoardIterator = PoorManMemoizingPegsSolution.Create(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -220,7 +220,7 @@ namespace PegPlayer.Test
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(new TestBoardSource(111, 111, 33, null));
-            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
+            var pegsBoardIterator = PoorManMemoizingPegsSolution.Create(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
