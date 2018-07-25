@@ -10,3 +10,4 @@ Visual Studio Community/Enterprise 2017
 3. Exec the batch file called `build_vsCommunity2017.cmd` or `build_vsEnterprise2017.cmd` dependending on you local environemnt
 4. Go to the folder `deployment-packages`
 5. Open the `PegPlayer.ConsoleApp.exe`
+6. Enjoy :)
