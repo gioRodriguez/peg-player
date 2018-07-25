@@ -13,6 +13,11 @@
 		<MsTestExePath>$(MSBuildProgramFiles32)\Microsoft Visual Studio\2017\Community\Common7\IDE\MSTest.exe</MsTestExePath>
 	</PropertyGroup>
 
+	<Target Name="_RestorePackages">
+		<Exec Command="nuget.exe restore"
+          WorkingDirectory="$(MSBuildThisFileDirectory)"/>
+	</Target>
+  
 	<Target Name="_CleanTestResultsDirectory">
 		<RemoveDir Directories="$(TestResultsPath)" Condition="Exists('$(TestResultsPath)')"/>
 		<MakeDir Directories="$(TestResultsPath)"/>
@@ -24,7 +29,7 @@
 	</Target>
 
 	<Target Name="Build"
-	        DependsOnTargets="_CleanTestResultsDirectory;_RemovePreviousBuild;">
+	        DependsOnTargets="_RestorePackages;_CleanTestResultsDirectory;_RemovePreviousBuild">
 		<ItemGroup>
 			<AllProjects Include="$(MSBuildThisFileDirectory)**\*.ConsoleApp.csproj"/>
 		</ItemGroup>
