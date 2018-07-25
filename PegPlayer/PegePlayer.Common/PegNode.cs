@@ -5,7 +5,7 @@ namespace PegePlayer.Common
 {
     public class PegNode
     {
-        public Peg Peg { get; private set; }
+        public Peg Peg { get; }
         private readonly ISet<PegNode> _linkedPegs;
         private readonly IDictionary<int, double> _probabilityMemoization = new Dictionary<int, double>();
 
@@ -50,7 +50,7 @@ namespace PegePlayer.Common
         {
             private readonly IDictionary<Peg, PegNode> _pegNodesCreated = new Dictionary<Peg, PegNode>();
 
-            public PegNode GetPeg(Peg peg)
+            public PegNode GetByPeg(Peg peg)
             {
                 if (!_pegNodesCreated.ContainsKey(peg))
                 {

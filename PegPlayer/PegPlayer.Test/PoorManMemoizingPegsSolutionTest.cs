@@ -5,14 +5,14 @@ using PegePlayer.Common;
 namespace PegPlayer.Test
 {
     [TestClass]
-    public class BruteForcePegsSolutionTest
+    public class PoorManMemoizingPegsSolutionTest
     {
         [TestMethod]
-        public void BruteForcePegsSolutionResolveTest()
+        public void PoorManMemoizingPegsSolutionResolveTest()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(TestBoardSource.CreateDefault());
-            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);            
+            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);            
 
             // Act
             pegsBoardIterator.Resolve();
@@ -25,7 +25,7 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        public void BruteForcePegsSolutionResolveWithFreefallSolutionTest()
+        public void PoorManMemoizingPegsSolutionResolveWithFreefallSolutionTest()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(new TestBoardSource(5, 5, 1, new[]
@@ -34,7 +34,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 1),
             }));
-            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -47,7 +47,7 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        public void BruteForcePegsSolutionResolveWith2Test()
+        public void PoorManMemoizingPegsSolutionResolveWith2Test()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(new TestBoardSource(5, 5, 2, new[]
@@ -56,7 +56,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -69,7 +69,7 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        public void BruteForcePegsSolutionResolveWith7x7Test()
+        public void PoorManMemoizingPegsSolutionResolveWith7x7Test()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(new TestBoardSource(7, 7, 1, new[]
@@ -78,7 +78,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -90,7 +90,7 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        public void BruteForcePegsSolutionResolveWith11x11Test()
+        public void PoorManMemoizingPegsSolutionResolveWith11x11Test()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(new TestBoardSource(11, 11, 2, new[]
@@ -99,7 +99,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -111,7 +111,7 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        public void BruteForcePegsSolutionResolveWith3x3Test()
+        public void PoorManMemoizingPegsSolutionResolveWith3x3Test()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(new TestBoardSource(3, 3, 2, new[]
@@ -120,7 +120,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -132,7 +132,7 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        public void BruteForcePegsSolutionResolveWith21x21Test()
+        public void PoorManMemoizingPegsSolutionResolveWith21x21Test()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(new TestBoardSource(21, 21, 2, new[]
@@ -141,7 +141,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -153,7 +153,7 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        public void BruteForcePegsSolutionRetsolveWith23x23Test()
+        public void PoorManMemoizingPegsSolutionRetsolveWith23x23Test()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(new TestBoardSource(23, 23, 2, new[]
@@ -162,7 +162,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -174,7 +174,7 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        public void BruteForcePegsSolutionResolveWith25x25Test()
+        public void PoorManMemoizingPegsSolutionResolveWith25x25Test()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(new TestBoardSource(25, 25, 2, new[]
@@ -183,7 +183,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -195,7 +195,7 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        public void BruteForcePegsSolutionResolveWith31x31Test()
+        public void PoorManMemoizingPegsSolutionResolveWith31x31Test()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(new TestBoardSource(31, 31, 2, new[]
@@ -204,7 +204,7 @@ namespace PegPlayer.Test
                 Peg.CreateMissingPeg(2, 1),
                 Peg.CreateMissingPeg(3, 2),
             }));
-            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();
@@ -216,11 +216,11 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
-        public void BruteForcePegsSolutionResolveWith111x111Test()
+        public void PoorManMemoizingPegsSolutionResolveWith111x111Test()
         {
             // Arrange
             var pegBoard = PegBoard.FromSource(new TestBoardSource(111, 111, 33, null));
-            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+            var pegsBoardIterator = new PoorManMemoizingPegsSolution(pegBoard);
 
             // Act
             pegsBoardIterator.Resolve();

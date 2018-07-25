@@ -6,11 +6,11 @@ namespace PegePlayer.Common
     public class PegBoard
     {
         private readonly Peg.Factory _pegsFactory;
-        public int Columns { get; private set; }
-        public int Rows { get; private set; }
-        public int Goal { get; private set; }
-        public IEnumerable<Peg> MissingPegs { get; private set; }
-        public Peg GoalPeg { get; private set; }
+        public int Columns { get; }
+        public int Rows { get; }
+        public int Goal { get; }
+        public IEnumerable<Peg> MissingPegs { get; }
+        public Peg GoalPeg { get; }
 
         private PegBoard(IPegBoardSource pegBoardSource)
         {
@@ -54,18 +54,9 @@ namespace PegePlayer.Common
             AddUpNeighbours(peg, neighbours);
             AddRigthNeighbours(peg, neighbours);
             return neighbours;
-        }
+        }        
 
-        public IEnumerable<Peg> GetPegDownNeighboursFrom(Peg peg)
-        {
-            var neighbours = new List<Peg>();
-            AddRigthNeighbours(peg, neighbours);
-            AddUpNeighbours(peg, neighbours);
-            AddLeftAndUpNeighbours(peg, neighbours);
-            return neighbours;
-        }
-
-        private void AddRigthNeighbours(Peg peg, List<Peg> neighbours)
+        private void AddRigthNeighbours(Peg peg, ICollection<Peg> neighbours)
         {
             if (GetUpAndRigthPegFrom(peg).IsValid)
             {
@@ -73,7 +64,7 @@ namespace PegePlayer.Common
             }
         }
 
-        private void AddUpNeighbours(Peg peg, List<Peg> neighbours)
+        private void AddUpNeighbours(Peg peg, ICollection<Peg> neighbours)
         {
             if (IsFreeFallPeg(peg))
             {

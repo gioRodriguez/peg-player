@@ -20,6 +20,11 @@ namespace PegePlayer.Common
         private Peg()
         {}
 
+        public static int CalculateHas(int row, int column)
+        {
+            return (row * 397) ^ column;
+        }
+
         #region Equals and GetHashCode Implementation
 
         public override bool Equals(object obj)
@@ -34,7 +39,7 @@ namespace PegePlayer.Common
 
         public override int GetHashCode()
         {
-            return (Row * 397) ^ Column;
+            return CalculateHas(Row, Column);
         }
 
         #endregion
@@ -102,7 +107,7 @@ namespace PegePlayer.Common
 
             private Peg NewPeg(int row, int column)
             {
-                var key = (row * 397) ^ column;
+                var key = CalculateHas(row, column);
                 if (!CreatedPegs.ContainsKey(key))
                 {
                     CreatedPegs[key] = Create(row, column, PegProbability(column), row != 0);
