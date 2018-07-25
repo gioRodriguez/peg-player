@@ -69,6 +69,27 @@ namespace PegPlayer.Test
         }
 
         [TestMethod]
+        public void BruteForcePegsSolutionResolveWith7x7Test()
+        {
+            // Arrange
+            var pegBoard = PegBoard.FromSource(new TestBoardSource(7, 7, 1, new[]
+            {
+                Peg.CreateMissingPeg(1, 1),
+                Peg.CreateMissingPeg(2, 1),
+                Peg.CreateMissingPeg(3, 2),
+            }));
+            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+
+            // Act
+            pegsBoardIterator.Resolve();
+            var actual = pegsBoardIterator.GetBestPositions();
+
+            // Assert
+            Assert.IsNotNull(actual);
+            Assert.IsTrue(actual.ElementAt(0).Probability <= 1);
+        }
+
+        [TestMethod]
         public void BruteForcePegsSolutionResolveWith11x11Test()
         {
             // Arrange
@@ -86,6 +107,7 @@ namespace PegPlayer.Test
 
             // Assert
             Assert.IsNotNull(actual);
+            Assert.IsTrue(actual.ElementAt(0).Probability <= 1);
         }
 
         [TestMethod]
@@ -106,6 +128,7 @@ namespace PegPlayer.Test
 
             // Assert
             Assert.IsNotNull(actual);
+            Assert.IsTrue(actual.ElementAt(0).Probability <= 1);
         }
 
         [TestMethod]
@@ -126,6 +149,7 @@ namespace PegPlayer.Test
 
             // Assert
             Assert.IsNotNull(actual);
+            Assert.IsTrue(actual.ElementAt(0).Probability <= 1);
         }
 
         [TestMethod]
@@ -146,6 +170,7 @@ namespace PegPlayer.Test
 
             // Assert
             Assert.IsNotNull(actual);
+            Assert.IsTrue(actual.ElementAt(0).Probability <= 1);
         }
 
         [TestMethod]
@@ -166,10 +191,10 @@ namespace PegPlayer.Test
 
             // Assert
             Assert.IsNotNull(actual);
+            Assert.IsTrue(actual.ElementAt(0).Probability <= 1);
         }
 
         [TestMethod]
-        [Ignore]
         public void BruteForcePegsSolutionResolveWith31x31Test()
         {
             // Arrange
@@ -187,6 +212,7 @@ namespace PegPlayer.Test
 
             // Assert
             Assert.IsNotNull(actual);
+            Assert.IsTrue(actual.ElementAt(0).Probability <= 1);
         }
     }
 }

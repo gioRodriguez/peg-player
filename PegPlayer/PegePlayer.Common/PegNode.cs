@@ -1,20 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PegePlayer.Common
 {
     public class PegNode
     {
-        public IEnumerable<PegNode> LinkedNodes => _linkedPegs;
-        public Peg Peg => _peg;
-
-        private readonly Peg _peg;
+        public Peg Peg { get; private set; }
         private readonly ISet<PegNode> _linkedPegs;
-        private readonly IDictionary<int, List<double>> _probabilityMemoizazion = new Dictionary<int, List<double>>();
+        private readonly IDictionary<int, double> _probabilityMemoization = new Dictionary<int, double>();
 
         public PegNode(Peg peg)
         {
-            _peg = peg;
+            Peg = peg;
             _linkedPegs = new HashSet<PegNode>();
         }
 
@@ -23,36 +20,37 @@ namespace PegePlayer.Common
             return $"{Peg}";
         }
 
-        public void AddLink(PegNode peg)
+        public PegNode AddLink(PegNode peg)
         {
             _linkedPegs.Add(peg);
+            return peg;
         }
 
-        public void AddMemoizacion(int initialPegColumn, double cumulativeProbability)
+        public void SetMemoization(int column, double cumulativeProbability)
         {
-            if (!_probabilityMemoizazion.ContainsKey(initialPegColumn))
+            if (!_probabilityMemoization.ContainsKey(column))
             {
-                _probabilityMemoizazion[initialPegColumn] = new List<double>();
+                _probabilityMemoization[column] = 0.0;                
             }
-
-            _probabilityMemoizazion[initialPegColumn].Add(cumulativeProbability);
+            
+            _probabilityMemoization[column] += cumulativeProbability;
         }
 
-        public bool HasMemoizasion()
+        public bool HasMemoization()
         {
-           return _probabilityMemoizazion.Keys.Count > 0;
+           return _probabilityMemoization.Keys.Count > 0;
         }
 
-        public IDictionary<int, List<double>> GetMemoizaion()
+        public IEnumerable<Memoization> GetMemoization()
         {
-            return _probabilityMemoizazion;
+            return _probabilityMemoization.Select(keyValue => Memoization.Create(keyValue.Key, keyValue.Value));
         }
 
         public class Factory
         {
             private readonly IDictionary<Peg, PegNode> _pegNodesCreated = new Dictionary<Peg, PegNode>();
 
-            public PegNode Create(Peg peg)
+            public PegNode GetPeg(Peg peg)
             {
                 if (!_pegNodesCreated.ContainsKey(peg))
                 {
@@ -62,5 +60,21 @@ namespace PegePlayer.Common
                 return _pegNodesCreated[peg];
             }
         }
+    }
+
+    public class Memoization
+    {
+        public static Memoization Create(int column, double probability)
+        {
+            return new Memoization
+            {
+                Column = column,
+                Probability = probability
+            };
+        }
+
+        public int Column { get; set; }
+
+        public double Probability { get; set; }
     }
 }
