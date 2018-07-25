@@ -214,5 +214,21 @@ namespace PegPlayer.Test
             Assert.IsNotNull(actual);
             Assert.IsTrue(actual.ElementAt(0).Probability <= 1);
         }
+
+        [TestMethod]
+        public void BruteForcePegsSolutionResolveWith111x111Test()
+        {
+            // Arrange
+            var pegBoard = PegBoard.FromSource(new TestBoardSource(111, 111, 33, null));
+            var pegsBoardIterator = new BruteForcePegsSolution(pegBoard);
+
+            // Act
+            pegsBoardIterator.Resolve();
+            var actual = pegsBoardIterator.GetBestPositions();
+
+            // Assert
+            Assert.IsNotNull(actual);
+            Assert.IsTrue(actual.ElementAt(0).Probability <= 1);
+        }
     }
 }

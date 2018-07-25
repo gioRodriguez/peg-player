@@ -38,8 +38,7 @@ namespace PegePlayer.Common
             _pegNodeStack.Push(pegNode);
             if (pegNode.HasMemoization())
             {
-                ResolveWithMemoization(pegNode, peg, cumulativeProbability);
-                //UpdateMemoization(pegNode);
+                ResolveWithMemoization(pegNode, peg);
                 return;
             }
 
@@ -58,48 +57,38 @@ namespace PegePlayer.Common
             }
         }
 
-        private void ResolveWithMemoization(PegNode pegNode, Peg peg, double cumulativeProbability)
+        private void ResolveWithMemoization(PegNode pegNode, Peg peg)
         {
-            //_pegNodeStack.Clear();
-            //var newMemoization = new Dictionary<int, double>();
             foreach (var memoization in pegNode.GetMemoization().ToList())
             {
-                var memoizationProbability = memoization.Probability * cumulativeProbability;
-                //foreach (var probability in memoization.Value)
-                //{
-                //    memoizationProbability = probability * peg.Probability;
-                //    //while (_pegNodeStack.Count > 0)
-                //    //{
-                //    //    if (_pegNodeStack.PeekPeg().Equals(peg))
-                //    //    {
-                //    //        _pegNodeStack.Pop();
-                //    //        continue;
-                //    //    }
-
-                //    //    memoizationProbability = memoizationProbability * _pegNodeStack.PopPeg().Probability;
-                //    //}
-                //}
-                var newMomoization = memoization.Probability;
-                while (_pegNodeStack.Count > 0)
-                {
-                    if (_pegNodeStack.PeekPeg().Equals(peg))
-                    {
-                        _pegNodeStack.Pop();
-                        continue;
-                    }
-
-                    var previousNode = _pegNodeStack.Pop();
-                    if (previousNode.Peg.Row == _pegBoard.Rows)
-                    {
-                        continue;
-                    }
-
-                    var previousProbability = newMomoization * previousNode.Peg.Probability;
-                    previousNode.SetMemoization(memoization.Column, previousProbability);
-                    newMomoization = previousProbability;
-                }
-                _probabilityByColumn[memoization.Column] += newMomoization;
+                var memoizedProbability = memoization.Probability;
+                memoizedProbability = UpdateMemoizedProbability(peg, memoization, memoizedProbability);
+                _probabilityByColumn[memoization.Column] += memoizedProbability;
             }
+        }
+
+        private double UpdateMemoizedProbability(Peg peg, Memoization memoization, double memoizedProbability)
+        {
+            while (_pegNodeStack.Count > 0)
+            {
+                if (_pegNodeStack.PeekPeg().Equals(peg))
+                {
+                    _pegNodeStack.Pop();
+                    continue;
+                }
+
+                var previousNode = _pegNodeStack.Pop();
+                if (previousNode.Peg.Row == _pegBoard.Rows)
+                {
+                    continue;
+                }
+
+                var previousProbability = memoizedProbability * previousNode.Peg.Probability;
+                previousNode.SetMemoization(memoization.Column, previousProbability);
+                memoizedProbability = previousProbability;
+            }
+
+            return memoizedProbability;
         }
 
         private void SetupMemoization(PegNode peg)

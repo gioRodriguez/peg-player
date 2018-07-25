@@ -83,24 +83,7 @@ namespace PegPlayer.Test
             Assert.AreEqual(1, actual.Count());
             Assert.IsTrue(actual.Contains(Peg.Create(3, 1)));
             Assert.AreEqual(Peg.PegProbality, actual.ElementAt(0).Probability);
-        }
-
-        [TestMethod]
-        public void PegBoardGetPegNeighboursFromBottonBoardTest()
-        {
-            // Arrange
-            var pegBoard = PegBoard.FromSource(TestBoardSource.CreateDefault());
-
-            // Act
-            var actual = pegBoard.GetPegUpNeighboursFrom(Peg.Create(5, 1));
-
-            // Assert
-            Assert.AreEqual(2, actual.Count());
-            Assert.IsTrue(actual.Contains(Peg.Create(4, 0)));
-            Assert.IsTrue(actual.Contains(Peg.Create(4, 2)));
-            Assert.AreEqual(Peg.PegAtBorderProbality, actual.ElementAt(1).Probability);
-            Assert.AreEqual(Peg.PegProbality, actual.ElementAt(0).Probability);
-        }
+        }        
 
         [TestMethod]
         public void PegBoardGetGoalPegTest()
