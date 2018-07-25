@@ -11,7 +11,7 @@ namespace PegePlayer.Common
         private readonly PegNodeStack _pegNodeStack = PegNodeStack.Create();
         private readonly PegNode.Factory _pegNodesFactory = new PegNode.Factory();
 
-        public PoorManMemoizingPegsSolution(PegBoard pegBoard)
+        private PoorManMemoizingPegsSolution(PegBoard pegBoard)
         {
             _pegBoard = pegBoard;
             for (var columnIdx = 0; columnIdx < _pegBoard.Columns; columnIdx++)
@@ -19,6 +19,8 @@ namespace PegePlayer.Common
                 _probabilityByColumn[columnIdx] = 0;
             }
         }
+
+        #region IPegBoardSolutionStrategy Implementation
 
         public void Resolve()
         {
@@ -30,6 +32,15 @@ namespace PegePlayer.Common
 
             TraversePegTree(_pegNodesFactory.GetByPeg(_pegBoard.GoalPeg), 1.0);
         }
+
+        public IEnumerable<Peg> GetBestPositions()
+        {
+            return _probabilityByColumn
+                .Select(keyValue => Peg.Create(1, keyValue.Key, keyValue.Value))
+                .OrderByDescending(peg => peg.Probability);
+        }
+
+        #endregion
 
         private void TraversePegTree(PegNode pegNode, double cumulativeProbability)
         {
@@ -96,13 +107,11 @@ namespace PegePlayer.Common
                 memoizationProbability = previousProbability;
                 previousNode.SetMemoization(peg.Peg.Column, previousProbability);
             }
-        }
+        }        
 
-        public IEnumerable<Peg> GetBestPositions()
+        public static PoorManMemoizingPegsSolution Create(PegBoard pegBoard)
         {
-            return _probabilityByColumn
-                .Select(keyValue => Peg.Create(1, keyValue.Key, keyValue.Value))
-                .OrderByDescending(peg => peg.Probability);
+            return new PoorManMemoizingPegsSolution(pegBoard);
         }
     }
 }
