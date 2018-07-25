@@ -10,7 +10,8 @@
 
 	<PropertyGroup>
 		<CommonProperties>Configuration=$(Configuration);Platform=$(Platform);VisualStudioVersion=15.0</CommonProperties>
-		<MsTestExePath>$(MSBuildProgramFiles32)\Microsoft Visual Studio\2017\Community\Common7\IDE\MSTest.exe</MsTestExePath>
+		<MsTestExePath Condition="'$(VSEnterprise)' == ''">$(MSBuildProgramFiles32)\Microsoft Visual Studio\2017\Community\Common7\IDE\MSTest.exe</MsTestExePath>
+		<MsTestExePath Condition="'$(VSEnterprise)' != ''">$(MSBuildProgramFiles32)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe</MsTestExePath>
 	</PropertyGroup>
 
 	<Target Name="_RestorePackages">
